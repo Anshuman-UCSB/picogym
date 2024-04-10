@@ -1,0 +1,16 @@
+
+Scalpel version 1.60 audit file
+Started at Wed Apr 10 02:15:45 2024
+Command line:
+scalpel tunn3l_v1s10n.bmp 
+
+Output directory: /home/biggergig/github/picogym/tunn3l_v1s10n/scalpel-output
+Configuration file: /etc/scalpel/scalpel.conf
+
+Opening target "(null)"
+
+The following files were carved:
+File		  Start			Chop		Length		Extracted From
+
+
+Completed at Wed Apr 10 02:15:45 2024

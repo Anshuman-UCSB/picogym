@@ -4,21 +4,23 @@
 	.align	2
 	.global	func1
 	.type	func1, %function
-func1:
-	sub	sp, sp, #16
-	str	w0, [sp, 12] # 266134863 
-	str	w1, [sp, 8] # 1592237099
-	ldr	w1, [sp, 12] # 1592237099
-	ldr	w0, [sp, 8] # 266134863
-	cmp	w1, w0 
-	bls	.L2
-	ldr	w0, [sp, 12]
-	b	.L3
+func1: 				
+	# inp1 = 266134863 
+	# inp2 = 1592237099 
+	sub	sp, sp, #16 # (#num is constant, allocates 2 vars on stack)
+	str	w0, [sp, 12] # store inp1 at sp12
+	str	w1, [sp, 8] # store inp2 at sp8
+	ldr	w1, [sp, 12] # load inp1 to w1
+	ldr	w0, [sp, 8] # load inp2 to w0
+	cmp	w1, w0		# inp2 - inp1
+	bls	.L2			# if if inp2 < inp1 then jump to .L2
+	ldr	w0, [sp, 12]# load inp1 to w0
+	b	.L3			# jump to .L3
 .L2:
-	ldr	w0, [sp, 8]
+	ldr	w0, [sp, 8] # not reached
 .L3:
-	add	sp, sp, 16
-	ret
+	add	sp, sp, 16 	# deallocate vars
+	ret				# go back
 	.size	func1, .-func1
 	.section	.rodata
 	.align	3
@@ -43,8 +45,8 @@ main:
 	add	x0, x0, 16
 	ldr	x0, [x0]
 	bl	atoi
-	mov	w1, w0
-	mov	w0, w19
+	mov	w1, w0		# w1 = inp2
+	mov	w0, w19		# w0 = inp1
 	bl	func1
 	mov	w1, w0
 	adrp	x0, .LC0

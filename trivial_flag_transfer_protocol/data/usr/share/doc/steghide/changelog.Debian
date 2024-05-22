@@ -1,0 +1,143 @@
+steghide (0.5.1-9.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Build-depend on libtool-bin. Closes: #761788.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 09 Oct 2014 10:09:35 +0000
+
+steghide (0.5.1-9) unstable; urgency=low
+
+  * Applied patch from Cyril Brulebois <cyril.brulebois@enst-
+    bretagne.fr> in order to build with gcc-4.3. Closes: #455394.
+
+ -- Ola Lundqvist <opal@debian.org>  Mon, 17 Mar 2008 07:40:19 +0100
+
+steghide (0.5.1-8) unstable; urgency=low
+
+  * Updated to standards version 3.7.2.
+  * Maintainer upload, closes: #360479.
+  * Updated to debhelper 4 compatibility.
+
+ -- Ola Lundqvist <opal@debian.org>  Wed, 30 Aug 2006 07:54:24 +0200
+
+steghide (0.5.1-7.1) unstable; urgency=high
+
+  * Non-maintainer upload
+  * EmbData.cc: Explicitly include config.h to work around libmhash's
+    namespace abuse of VERSION
+  * Forcefully cast the return of mhash_get_hash_name from uint8_t * to char *
+  * Happy birthday, vorlon, closes: #360479
+
+ -- Erinn Clark <erinn@double-helix.org>  Thu, 27 Apr 2006 22:17:11 -0400
+
+steghide (0.5.1-7) unstable; urgency=low
+
+  * Updated config.sub and config.guess to make it possible to build on
+    Debian GNU/k*BSD, closes: #332798.
+  * Updated standards version to 3.6.2.
+    This implies that dh version is not 3 instead of 1 and the
+    debian/rules file have been changed accordingly.
+  * Updated to new FSF address.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat,  5 Nov 2005 20:26:55 +0100
+
+steghide (0.5.1-6) unstable; urgency=low
+
+  * Now build depend on libjpeg-dev, closes: #324387.
+  * Applied patch for German traslation, closes: #313898. Thanks to Jens
+    Seidel <jensseidel@users.sf.net> for the fix.
+  * Applied patch from Matt Kraai <kraai@ftbfs.org> to make it build
+    with gcc4, closes: #324056.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat,  8 Oct 2005 18:58:48 +0200
+
+steghide (0.5.1-5) unstable; urgency=low
+
+  * Applied patch from Andreas Jochens <aj@andaco.de> so it can build
+    with gcc 3.4, closes: #274184.
+  * Updated standards version to 3.6.1.
+  * Refixed so that INSTALL and COPYING information is not in the
+    deb archive.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat,  2 Oct 2004 20:10:39 +0200
+
+steghide (0.5.1-4) unstable; urgency=low
+
+  * Added libtool to build deps, closes: #239724.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat, 27 Mar 2004 12:07:03 +0100
+
+steghide (0.5.1-3) unstable; urgency=low
+
+  * Added build dependency on zlib, closes: #239277.
+
+ -- Ola Lundqvist <opal@debian.org>  Mon, 22 Mar 2004 08:11:12 +0100
+
+steghide (0.5.1-2) unstable; urgency=low
+
+  * Removed gcc-2.95 from build depends, closes: #19945.
+
+ -- Ola Lundqvist <opal@debian.org>  Sun, 21 Mar 2004 19:05:44 +0100
+
+steghide (0.5.1-1) unstable; urgency=low
+
+  * New upstream release, closes: #227176.
+  * This version works with gcc3 with minor paches, closes: #199459.
+
+ -- Ola Lundqvist <opal@debian.org>  Sat, 20 Mar 2004 18:31:36 +0100
+
+steghide (0.4.6b-2) unstable; urgency=low
+
+  * Fixed build dependency so it can compile on sparc, closes: #198138.
+
+ -- Ola Lundqvist <opal@debian.org>  Thu, 17 Jul 2003 08:52:53 +0200
+
+steghide (0.4.6b-1) unstable; urgency=low
+
+  * New maintainer, closes: #174125.
+  * New upstream version.
+  * Updated to standards version 3.5.8.
+  * Reformatted the description so it is a bit more readable.
+  * Changed the copyright file so it contains a better description
+    of the GPL. Also fixed a lintian error there.
+  * Build depends on gcc-2.95 and changed rules file as well.
+  * Moved from non-US to misc.
+
+ -- Ola Lundqvist <opal@debian.org>  Wed, 11 Jun 2003 22:39:06 +0200
+
+steghide (0.4.2-0) unstable; urgency=low
+
+  * New upstream version (Closes: #123761)
+  * Removed README.Debian, no longer really useful
+  * Updated standards version
+
+ -- Brian Russo <wolfie@debian.org>  Wed, 30 Jan 2002 14:40:23 -1000
+
+steghide (0.3.1-4) unstable; urgency=low
+
+  * Adopting package (Closes: #100264)
+  * Updated maintainer field in control.. hurrah
+
+ -- Brian Russo <wolfie@debian.org>  Thu, 14 Jun 2001 14:02:54 +1100
+
+steghide (0.3.1-3) unstable; urgency=low
+
+  * Corrected typo in copyright file. 
+  * Removed installation of INSTALL file to fix lintian warning.
+
+ -- Dr. Guenter Bechly <gbechly@debian.org>  Thu, 29 Mar 2001 15:20:56 +0200
+
+steghide (0.3.1-2) unstable; urgency=low
+
+  * Corrected the Section in control, and the following;
+    closes: #81013
+
+ -- Dr. Guenter Bechly <gbechly@debian.org>  Fri,  9 Feb 2001 21:20:07 +0100
+
+steghide (0.3.1-1) unstable; urgency=low
+
+  * Initial Release, closes: Bug #81013.
+  * Included the test-image testimage.bmp.gz from the steghide website.
+  * Commented out the installation of docs in Makefile.am.
+
+ -- Dr. Guenter Bechly <gbechly@debian.org>  Mon,  1 Jan 2001 20:24:27 +0100

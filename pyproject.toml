@@ -1,0 +1,10 @@
+[project]
+name = "picogym"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pwntools>=4.14.1",
+    "setuptools>=79.0.1",
+]
